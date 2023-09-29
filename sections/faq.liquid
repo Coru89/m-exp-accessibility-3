@@ -51,14 +51,17 @@
         <div class="faq">
           {%- if section.settings.show_navigation and categories.size > 0 -%}
             <div class="faq-navigation hidden-pocket">
+
               <scroll-spy class="scroll-spy">
-                <ul class="faq__list scroll-spy__list list--unstyled">
-                  {%- for category in categories -%}
-                    <li class="faq__item scroll-spy__item">
-                      <a class="scroll-spy__anchor heading heading--small" href="#{{ category.settings.anchorID }}" data-smooth-scroll>{{ category.settings.title | escape }}</a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
+                <nav aria-label="page menu">
+                  <ul class="faq__list scroll-spy__list list--unstyled">
+                    {%- for category in categories -%}
+                      <li class="faq__item scroll-spy__item">
+                        <a class="scroll-spy__anchor heading heading--small" href="#{{ category.settings.anchorID }}" data-smooth-scroll>{{ category.settings.title | escape }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </nav>
               </scroll-spy>
             </div>
           {%- endif -%}
