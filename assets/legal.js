@@ -19,6 +19,8 @@ rteEl.forEach(function (element) {
     // Set the id attribute of the h2 element to the modified content
     h2.setAttribute("id", id);
 
+    h2.setAttribute("tabindex", "-1");
+
     // Create a new list item for the h2 element
     const listItem = document.createElement("li");
     listItem.classList.add("scroll-spy__item", "faq__item");
