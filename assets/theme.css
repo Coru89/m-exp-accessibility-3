@@ -16259,3 +16259,7 @@ div.shopify-cleanslate .DnvZqPMEvBFbBre5UuP9:hover:not(.LVeInvZ5HcNOW1Zsn7NH) {
 form input[required="required"] + label:after {
   content:" *";
 }
+
+.shopify-section--main-customers-register .heading, #login-form-container .heading {
+  color: #cccccc;
+}
