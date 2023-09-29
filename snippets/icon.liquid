@@ -38,7 +38,7 @@
       </svg>
 
     {%- when 'close' -%}
-      <svg role="img" aria-labelledby="closeModal" focusable="false" width="{{ width | default: 14 }}" height="{{ height | default: 14 }}" class="{{ icon_class }}" viewBox="0 0 14 14">
+      <svg role="img" aria-hidden="true" aria-labelledby="closeModal" focusable="false" width="{{ width | default: 14 }}" height="{{ height | default: 14 }}" class="{{ icon_class }}" viewBox="0 0 14 14">
         <title id="closeModal">Close Modal</title>
         <path d="M13 13L1 1M13 1L1 13" stroke="currentColor" stroke-width="{{ settings.icon_stroke_width }}" fill="none"></path>
       </svg>
@@ -130,7 +130,7 @@
       </svg>
 
     {%- when 'header-hamburger' -%}
-      <svg focusable="false" width="{{ width | default: 18 }}" height="{{ height | default: 14 }}" class="{{ icon_class }}" viewBox="0 0 18 14">
+      <svg aria-hidden="true" focusable="false" width="{{ width | default: 18 }}" height="{{ height | default: 14 }}" class="{{ icon_class }}" viewBox="0 0 18 14">
         <path d="M0 1h18M0 13h18H0zm0-6h18H0z" fill="none" stroke="currentColor" stroke-width="{{ settings.icon_stroke_width }}"></path>
       </svg>
 
@@ -140,7 +140,7 @@
       </svg>
 
     {%- when 'header-customer' -%}
-      <svg focusable="false" width="{{ width | default: 18 }}" height="{{ height | default: 17 }}" class="{{ icon_class }}" viewBox="0 0 18 17">
+      <svg aria-hidden="true" focusable="false" width="{{ width | default: 18 }}" height="{{ height | default: 17 }}" class="{{ icon_class }}" viewBox="0 0 18 17">
         <circle cx="9" cy="5" r="4" fill="none" stroke="currentColor" stroke-width="{{ settings.icon_stroke_width }}" stroke-linejoin="round"></circle>
         <path d="M1 17v0a4 4 0 014-4h8a4 4 0 014 4v0" fill="none" stroke="currentColor" stroke-width="{{ settings.icon_stroke_width }}"></path>
       </svg>
