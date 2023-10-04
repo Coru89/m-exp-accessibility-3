@@ -1851,7 +1851,9 @@
       this.delegate.off("mouseup");
     }
     _checkScrollability() {
-      this.classList.toggle("is-scrollable", this.scrollWidth > this.offsetWidth);
+      // accessibility 360 issue #101, for multi-column section we need to use <ul></ul>, so look nested ul tag below
+      this.scrollEl = this.querySelector("ul.scrollable-content") ? this.querySelector("ul.scrollable-content") : this;
+      this.classList.toggle("is-scrollable", this.scrollEl.scrollWidth > this.scrollEl.offsetWidth);
     }
     _calculateProgress() {
       const scrollLeft = this.scrollLeft * (window.themeVariables.settings.direction === "ltr" ? 1 : -1);

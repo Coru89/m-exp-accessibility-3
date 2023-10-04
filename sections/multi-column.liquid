@@ -92,13 +92,14 @@
       {%- endif -%}
 
       {%- if section.blocks.size > 0 -%}
-        <multi-column {% if section.settings.stack_items %}stack{% endif %} {% if section.settings.reveal_on_scroll %}stagger-apparition{% endif %} class="multi-column multi-column--pocket-{{ section.settings.mobile_item_size }} multi-column--{{ section.settings.desktop_item_size }} multi-column--spacing-{{ section.settings.spacing }}">
+        <multi-column {% if section.settings.stack_items %}stack{% endif %} {% if section.settings.reveal_on_scroll %}stagger-apparition{% endif %} class="multi-column multi-column--pocket-{{ section.settings.mobile_item_size }} multi-column--{{ section.settings.desktop_item_size }} multi-column--spacing-{{ section.settings.spacing }}">          
           {%- assign align_arrows_on_image = true -%}
           {%- assign smallest_image_aspect_ratio = 0 -%}
 
           <div {% unless section.settings.stack_items %}class="scroller"{% endunless %}>
-            <scrollable-content class="multi-column__inner multi-column__inner--{{ section.settings.column_alignment }} {% unless section.settings.stack_items %}multi-column__inner--scroller{% endunless %}">
-              {%- case section.settings.desktop_item_size -%}
+            <scrollable-content>
+              <ul class="scrollable-content multi-column__inner multi-column__inner--{{ section.settings.column_alignment }} {% unless section.settings.stack_items %}multi-column__inner--scroller{% endunless %}">
+                {%- case section.settings.desktop_item_size -%}
                 {%- when 'pico' -%}
                   {%- assign desktop_items_per_row = 8 -%}
 
@@ -156,63 +157,63 @@
               {%- assign desktop_items_per_row_minus_one = desktop_items_per_row | minus: 1 -%}
               {%- assign gap_width = desktop_item_gap | divided_by: desktop_items_per_row | times: desktop_items_per_row_minus_one -%}
 
-
-              {%- for block in section.blocks -%}
-                {%- capture block_content -%}
-                  {%- if block.settings.title_impact != blank -%}
-                    <h4 class="impact impact--small">{{ block.settings.title_impact | newline_to_br }}</h4>
-                  {%- endif -%}
-
-                  {%- if block.settings.image != blank -%}
-                    {%- assign smallest_image_aspect_ratio = smallest_image_aspect_ratio | at_least: block.settings.image.aspect_ratio -%}
-
-                    {%- if block.settings.title != blank -%}
-                      <div class="multi-column__text-container text--{{ block.settings.text_alignment }} text-container">
-                        <p class="heading h5">{{ block.settings.title }}</p>
-                      </div>
+                {%- for block in section.blocks -%}
+                  {%- capture block_content -%}
+                    {%- if block.settings.title_impact != blank -%}
+                      <h4 class="impact impact--small">{{ block.settings.title_impact | newline_to_br }}</h4>
                     {%- endif -%}
 
-                    {%- if block.settings.link_url != blank -%}
-                      <a href="{{ block.settings.link_url }}" class="multi-column__image-wrapper" style="max-width: {{ block.settings.image_width }}%; width: {{ block.settings.image.width }}px">
-                        <img loading="lazy" sizes="(max-width: 740px) {{ mobile_calculated_size }}, (max-width: 999px) {{ tablet_calculated_size }}, {{ 1520.0 | divided_by: desktop_items_per_row | minus: gap_width | ceil }}px" class="multi-column__image" {% render 'image-attributes', image: block.settings.image, sizes: '200,300,400,500,600,700,800,900,1000,1100,1200' %}>
-                      </a>
-                    {%- else -%}
-                      <div class="multi-column__image-wrapper" style="max-width: {{ block.settings.image_width }}%; width: {{ block.settings.image.width }}px">
-                        <img loading="lazy" sizes="(max-width: 740px) {{ mobile_calculated_size }}, (max-width: 999px) {{ tablet_calculated_size }}, {{ 1520.0 | divided_by: desktop_items_per_row | minus: gap_width | ceil }}px" class="multi-column__image" {% render 'image-attributes', image: block.settings.image, sizes: '200,300,400,500,600,700,800,900,1000,1100,1200' %}>
-                      </div>
-                    {%- endif -%}
-                  {%- else -%}
-                    {%- assign align_arrows_on_image = false -%}
-                  {%- endif -%}
+                    {%- if block.settings.image != blank -%}
+                      {%- assign smallest_image_aspect_ratio = smallest_image_aspect_ratio | at_least: block.settings.image.aspect_ratio -%}
 
-                  {%- if block.settings.title != blank or block.settings.content != blank or block.settings.link_text != blank -%}
-                    <div class="multi-column__text-container text--{{ block.settings.text_alignment }} text-container">
-                      <div>
-                        {%- if block.settings.content != blank -%}
-                          {{- block.settings.content -}}
-                        {%- endif -%}
-                      </div>
-
-
-                      {%- if block.settings.link_text != blank -%}
-                        {%- if block.settings.link_style == 'link' -%}
-                          <a href="{{ block.settings.link_url }}" class="multi-column__link heading heading--small link">{{ block.settings.link_text | escape }}</a>
-                        {%- else -%}
-                          <div class="button-wrapper">
-                            <a href="{{ block.settings.link_url }}" class="multi-column__button button button--small button--primary">{{ block.settings.link_text | escape }}</a>
-                          </div>
-                        {%- endif -%}
+                      {%- if block.settings.title != blank -%}
+                        <div class="multi-column__text-container text--{{ block.settings.text_alignment }} text-container">
+                          <p class="heading h5">{{ block.settings.title }}</p>
+                        </div>
                       {%- endif -%}
-                    </div>
-                  {%- endif -%}
-                {%- endcapture -%}
 
-                {%- if block_content != blank -%}
-                  <div id="block-{{ section.id }}-{{ block.id }}" class="multi-column__item multi-column__item--align-{{ block.settings.vertical_alignment }} {% if block.settings.link_url != blank %}image-zoom{% endif %}" {% if section.settings.reveal_on_scroll %}reveal{% endif %} {{ block.shopify_attributes }}>
-                    {{- block_content -}}
-                  </div>
-                {%- endif -%}
-              {%- endfor -%}
+                      {%- if block.settings.link_url != blank -%}
+                        <a href="{{ block.settings.link_url }}" class="multi-column__image-wrapper" style="max-width: {{ block.settings.image_width }}%; width: {{ block.settings.image.width }}px">
+                          <img loading="lazy" sizes="(max-width: 740px) {{ mobile_calculated_size }}, (max-width: 999px) {{ tablet_calculated_size }}, {{ 1520.0 | divided_by: desktop_items_per_row | minus: gap_width | ceil }}px" class="multi-column__image" {% render 'image-attributes', image: block.settings.image, sizes: '200,300,400,500,600,700,800,900,1000,1100,1200' %}>
+                        </a>
+                      {%- else -%}
+                        <div class="multi-column__image-wrapper" style="max-width: {{ block.settings.image_width }}%; width: {{ block.settings.image.width }}px">
+                          <img loading="lazy" sizes="(max-width: 740px) {{ mobile_calculated_size }}, (max-width: 999px) {{ tablet_calculated_size }}, {{ 1520.0 | divided_by: desktop_items_per_row | minus: gap_width | ceil }}px" class="multi-column__image" {% render 'image-attributes', image: block.settings.image, sizes: '200,300,400,500,600,700,800,900,1000,1100,1200' %}>
+                        </div>
+                      {%- endif -%}
+                    {%- else -%}
+                      {%- assign align_arrows_on_image = false -%}
+                    {%- endif -%}
+
+                    {%- if block.settings.title != blank or block.settings.content != blank or block.settings.link_text != blank -%}
+                      <div class="multi-column__text-container text--{{ block.settings.text_alignment }} text-container">
+                        <div>
+                          {%- if block.settings.content != blank -%}
+                            {{- block.settings.content -}}
+                          {%- endif -%}
+                        </div>
+
+
+                        {%- if block.settings.link_text != blank -%}
+                          {%- if block.settings.link_style == 'link' -%}
+                            <a href="{{ block.settings.link_url }}" class="multi-column__link heading heading--small link">{{ block.settings.link_text | escape }}</a>
+                          {%- else -%}
+                            <div class="button-wrapper">
+                              <a href="{{ block.settings.link_url }}" class="multi-column__button button button--small button--primary">{{ block.settings.link_text | escape }}</a>
+                            </div>
+                          {%- endif -%}
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endcapture -%}
+
+                  {%- if block_content != blank -%}
+                    <li id="block-{{ section.id }}-{{ block.id }}" class="multi-column__item multi-column__item--align-{{ block.settings.vertical_alignment }} {% if block.settings.link_url != blank %}image-zoom{% endif %}" {% if section.settings.reveal_on_scroll %}reveal{% endif %} {{ block.shopify_attributes }}>
+                      {{- block_content -}}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
             </scrollable-content>
 
             {%- unless section.settings.stack_items -%}
