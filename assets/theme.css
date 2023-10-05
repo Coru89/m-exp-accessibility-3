@@ -16262,7 +16262,8 @@ div.shopify-cleanslate .DnvZqPMEvBFbBre5UuP9:hover:not(.LVeInvZ5HcNOW1Zsn7NH) {
 }
 
 /* adding * to required form fields */
-form input[required="required"] + label:after {
+form input[required="required"] + label:after,
+form input[required] + label:after  {
   content:" *";
 }
 
